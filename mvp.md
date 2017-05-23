@@ -14,7 +14,7 @@ A 'rule' is a function that takes an `env` Object (and possibly some options), p
 
 ### The `rules` API
 
-#### `rules.new(` rule definition `)
+#### `rules.new(` rule definition `)`
 
 ```javascript
 /* Simple rule definition */
