@@ -1,104 +1,51 @@
-## Rules Object
+# Code Evaluation System
 
-Rules are functions that check a specific part of the code. If a rule fails, the submitted code fails. If all rules pass, the submitted code passes.
+'Rules' are defined, which preform checks on submitted code, then return a pass or fail result.
 
-Define a rule to check that no style elements are used in the submitted code:
+Rules may be created globaly, and applied to multiple
 
-```javascript
-/* Example 1 */
-rules = {
-  // The key is the name of the rule
-  // The name is used to enable or disable the rule later
-  'no-style-element': function (env) {
-    // We'll do the body in the next example
-  },
+1. Rules
+2. The `env`
+3. Assert
 
-  // Alternatively
-  'no-style-element': env => {
+## Rules
 
-  },
+A 'rule' is a function that takes an `env` Object (and possibly some options), preforms a check on the submitted code, then returns a pass or fail result.
 
-  // Or
-  noStyleElement(env) {
+### The `rules` API
 
-  }  
-}
-```
-
-The first or second definitions are preferred, because rules should use dashes (`-`) instead of camel case, similarly to ESLint or JSHint. However, the third method does work.
-
-### The `env` Object
-
-Rules inspect the given code using the `env` Object. The `env` looks like this:
-
-(See the next section for specific usage)
+#### `rules.new(` rule definition `)
 
 ```javascript
-env = {
-  rawInput: 'string', /* the exact code that was submitted */
-  findElement: 'function', /* locate an element in the processed page */
-  /* ... more to come later */
-}
-```
+/* Simple rule definition */
+rules.new({
+  name: 'example-name', 
+  // string, must be unique
+  
+  feedback: "You're missing a `doctype` tag! You should always include a doctype declaration",
+  // string, used if the check fails
+  
+  check: env =>
+      env.doctype == 'HTML5'
+  // function, returns true/false if the check passed/failed
+})
 
 
-## Feedback Object
-
-```javascript
-feedback = {
-
-}
-```
-
-Keys are the name of a rule, and the value is used to turn the rule on or off, or change the feedback.
-
-```javascript
-/* Example 1 */
-feedback = {
-  'rule-1': true,
-  'rule-2': false,
-  'rule-3': 'rule three failed'
-}
-```
-
-In `Example 1`, `rule-1` is turned on, `rule-2` is turned off, and `rule-3` is turned on.
-
-Rule 1 uses it's default feedback, while rule 3 uses special feedback (`"rule three failed"`)
-
-Set a rule to one of the following:
-
-### `Boolean`
-
-Rule is turned on when the boolean is `true`, off when `false`
-
-```javascript
-feedback = {
-  'rule-1': true,
-  'rule-2': false
-}
-```
-
-### `String`
-
-Rule is turned on, uses the given string as feedback
-
-```javascript
-feedback = {
-  'rule-1': 'Rule 1 failed' // Obviously this is very bad feedback -- it's just an example
-}
-```
-
-### `Object`
-
-Turns the rule on, and may set special keys to modify the rule.
-
-```javascript
-feedback = {
-  'rule-1': {
-    feedback: 'Rule 1 failed', // Feedback to use for the rule
-    options: { // An object that gets passed to the rule
-      option1: false // Options can be arbitrarily defined by the rule
-    }
-  }
-}
+/* Rule that accepts arguments */
+rules.new({
+  name: 'example-name', 
+  feedback: "You're missing a `doctype` tag! You should always include a doctype declaration",  
+  
+  options: { // Object, keys are the name of options
+    version: 'HTML5' // value is the default for the option. 
+                     // type is strict (eg the rule may not be called with an array if the default is a string)
+  }, 
+  
+  check: (env, options) => // check should accept 'options' object too
+    env.doctype == options.version
+      
+  // alternate syntax (ES2015)
+  check: (env, {version}) =>
+    env.doctype == version
+})
 ```
