@@ -12,11 +12,9 @@ Rules may be created globaly, and applied to multiple submissions
 
 A 'rule' is a function that takes an `env` Object (and possibly some options), preforms a check on the submitted code, then returns a pass or fail result.
 
-### The `rules` API
+### `rules.new( Object: ruleDefinition )`
 
-#### `rules.new(` rule definition `)`
-
-##### Simple rule definition
+#### Simple rule definition
 
 ```javascript
 rules.new({
@@ -32,7 +30,7 @@ rules.new({
 })
 ```
 
-##### Rule that accepts arguments
+#### Rule that accepts arguments
 
 ```javascript
 rules.new({
@@ -53,7 +51,7 @@ rules.new({
 })
 ```
 
-##### Rule that returns dynamic feedback
+#### Rule that returns dynamic feedback
 
 ```javascript
 rules.new({
@@ -73,7 +71,7 @@ rules.new({
 })
 ```
 
-##### Using templated feedback
+#### Using templated feedback
 
 All feedback may contain special templates, which are dynamically filled in before being presented to the user.
 
@@ -116,4 +114,25 @@ rule.new({
 
 See the "Feedback" section for exact usage of template feedback
 
+### `rules.alias( Object: aliasDefinition )`
 
+Rules may be *aliased* to create a new rule, which uses an existing rule and a new default options
+
+```javascript
+// Assumes we have the 'basic-structure' rule from the last example
+rule.alias({
+  name: 'basic-structure', // The existing rule
+  alias: 'has-body-tag', // The alias to create
+  options: {
+    checkFor: ['body', 'html', 'head']
+  }
+})
+```
+
+An important aspect of the library is that it can check that names make sense. For example, if you try to alias the `basic-structur` rule, it could error, and say "Hey, you don't *have* a 'basic-structur' rule". Or if an alias tries to provide a default for the `checkFar` option, it errors and tells you that the 'basic-structure' rule doesn't have a 'checkFar' option.
+
+This aspect will be a huge help when developing exercises, because it's a big step toward preventing an exercise from failing due to a mistake in the assertion code.
+
+## Assert
+
+The `assert` function
