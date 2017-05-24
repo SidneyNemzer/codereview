@@ -79,9 +79,41 @@ All feedback may contain special templates, which are dynamically filled in befo
 
 Some use cases of tempated feedback:
 
-* Dynamically pluralize words (eg "There is 1 error" vs "There **are** 2 **errors**")
+* Dynamically pluralize words
+  * "There **is** 1 **error**" VS "There **are** 2 **errors**"
 * Dynamically insert an array into a scentence
-  * For example:
-      * `['body', 'html', 'head']` -> "You're missing the **body, html, and head** tag**s**"
-      * `['body', 'html']` -> "You're missing the **body and html** tag**s**"
-      * `['body']` -> "You're missing the **body** tag"
+  * `['body', 'html', 'head']` -> "You're missing the **body, html, and head** tag**s**"
+  * `['body', 'html']` -> "You're missing the **body and html** tag**s**"
+  * `['body']` -> "You're missing the **body** tag"
+  
+```javascript
+rule.new({
+    name: 'basic-structure',
+    feedback: "You're missing {{ an_some }} important {{ word }}: {{ list }}",
+    // In this example, the number of items in the 'list' is used
+    // to derive whether or not the scentence is plural
+    
+    // Example result:
+    // "You're missing some important elements: body, html, and head"
+    
+    options: {
+        checkFor: ['body', 'html', 'head']
+    },
+    check: (env, options) => {
+        const checkFor = options.checkFor
+        
+        const missingElements = checkFor.filter(tagName => {
+            return !env[tagName]
+        })
+        
+        return { // Returning an Object means "This failed" and "Use the Object to template the feedback"
+            list: missingElements, 
+            word: 'element'
+        }
+    }
+})
+```
+
+See the "Feedback" section for exact usage of template feedback
+
+
