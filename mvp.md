@@ -34,14 +34,14 @@ The API provides many ways to test the code and create feedback
 
 ## Rules
 
-A 'rule' is a function that takes an `env` Object (and possibly some options), preforms a check on the submitted code, then returns a pass or fail result.
+A 'rule' is a function that takes an `env` Object (and possibly some options), preforms a check on the submitted code, then returns a pass or fail result. (Read more about the `env` in the next section).
 
-### `rules.new( Object: ruleDefinition )`
+### `ces.newRule( Object: ruleDefinition )`
 
 #### Simple rule definition
 
 ```javascript
-rules.new({
+ces.newRule({
   name: 'example-name', 
   // string, must be unique
   
@@ -57,7 +57,7 @@ rules.new({
 #### Rule that accepts arguments
 
 ```javascript
-rules.new({
+ces.newRule({
   name: 'example-name', 
   feedback: "You're missing a `doctype` tag! You should always include a doctype declaration",  
   
@@ -78,7 +78,7 @@ rules.new({
 #### Rule that returns dynamic feedback
 
 ```javascript
-rules.new({
+ces.newRule({
   name: 'example-name',
   
   // No 'feedback' key is needed in this case
@@ -101,15 +101,8 @@ All feedback may contain special templates, which are dynamically filled in befo
 
 Some use cases of tempated feedback:
 
-* Dynamically pluralize words
-  * "There **is** 1 **error**" VS "There **are** 2 **errors**"
-* Dynamically insert an array into a scentence
-  * `['body', 'html', 'head']` -> "You're missing the **body, html, and head** tag**s**"
-  * `['body', 'html']` -> "You're missing the **body and html** tag**s**"
-  * `['body']` -> "You're missing the **body** tag"
-  
 ```javascript
-rule.new({
+ces.newRule({
     name: 'basic-structure',
     feedback: "You're missing {{ an_some }} important {{ word }}: {{ list }}",
     // In this example, the number of items in the 'list' is used
@@ -138,13 +131,13 @@ rule.new({
 
 See the "Feedback" section for exact usage of template feedback
 
-### `rules.alias( Object: aliasDefinition )`
+### `ces.aliasRule( Object: aliasDefinition )`
 
 Rules may be *aliased* to create a new rule, which uses an existing rule and a new default options
 
 ```javascript
 // Assumes we have the 'basic-structure' rule from the last example
-rule.alias({
+ces.aliasRule({
   name: 'basic-structure', // The existing rule
   alias: 'has-body-tag', // The alias to create
   options: {
@@ -153,14 +146,33 @@ rule.alias({
 })
 ```
 
-An important aspect of the library is that it can check that names make sense. For example, if you try to alias the `basic-structur` rule, it could error, and say "Hey, you don't *have* a 'basic-structur' rule". Or if an alias tries to provide a default for the `checkFar` option, it errors and tells you that the 'basic-structure' rule doesn't have a 'checkFar' option.
+An important aspect of the library is that it can check that names are correct. For example, if you try to alias the `basic-structur` rule, it should error, and say "Hey, you don't *have* a 'basic-structur' rule". Or if an alias tries to provide a default for the `checkFar` option, it errors and tells you that the 'basic-structure' rule doesn't have a 'checkFar' option.
 
 This aspect will be a huge help when developing exercises, because it's a big step toward preventing an exercise from failing due to a mistake in the assertion code.
 
 ## The `env` variable
+
+The `env` variable is passed to 'check' functions, and allows the function to inspect the submitted code.
+
+Here's an overveiw of the `env`:
+
+*Note: I plan to add a custom element Object*
+
+```javascript
+env.element( String: cssSelector ) -> Object: HTMLElement
+env.elements( String: cssSelector ) -> Array of HTMLElement
+```
 
 ## Assert
 
 The `assert` function
 
 ## Feedback
+
+
+* Dynamically pluralize words
+  * "There **is** 1 **error**" VS "There **are** 2 **errors**"
+* Dynamically insert an array into a scentence
+  * `['body', 'html', 'head']` -> "You're missing the **body, html, and head** tag**s**"
+  * `['body', 'html']` -> "You're missing the **body and html** tag**s**"
+  * `['body']` -> "You're missing the **body** tag"
