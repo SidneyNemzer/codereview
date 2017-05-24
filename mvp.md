@@ -1,8 +1,31 @@
 # Code Evaluation System
 
-'Rules' are defined, which preform checks on submitted code, then return a pass or fail result.
+> v1.0
+> Well, not yet. I'm still working on this MVP. But once I'm done, I'll call it version 1.0
 
-Rules may be created globaly, and applied to multiple submissions
+## Introduction
+
+The most effective learning makes use of instruction *and* evaluation. Instruction is fairly straight-forward. And in many cases, so is evaluation. But when teaching how to program, evaluation becomes difficult; multiple choice questions can enhance learning, but the best evaluation for programing is *code exercises*, where the student writes their own code to complete a goal.
+
+Most programing languages are designed to be written correctly. That is, most compilers or interpreters don't handle mistakes well. Forget a single character, or missplace a token, and the errors returned can be unintelligible to the beginner. Beginners benefit from careful guidence, but at the same time, compilers/interpreters shouldn't have to concern themselves with the mistakes that a beginner could make.
+
+An instructor or teacher could provide such guidance, but reading lines upon lines of microscopic mistakes can quickly wear on a person. The next best option is to make a computer read the code, and provide guidence.
+
+The concept is simple, but the implementation may not be; we must create code that: reads code, points out common mistakes, and can verify that the goal was acheived.
+
+Furthermore, the 'goal' cannot be hard-coded; it will be different for each exercise. So this system should also allow the goal to be specified, and allow helpful feedback to be provided which guides the student twoard the goal.
+
+**TLDR** This API assists in creating code exercises
+
+Version 1.0 is targeted at HTML and CSS. It is written in JavaScript.
+
+## The CES API
+
+The designer creates 'rules', which preform checks on submitted code, then return a pass or fail result.
+
+The API provides many ways to test the code and create feedback
+
+## Table of Contents
 
 1. Rules
 2. The `env`
