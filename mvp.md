@@ -13,11 +13,11 @@ An instructor or teacher could provide such guidance, but reading lines upon lin
 
 The concept is simple, but the implementation may not be; we must create code that: reads code, points out common mistakes, and can verify that the goal was acheived.
 
-Furthermore, the 'goal' cannot be hard-coded; it will be different for each exercise. So this system should also allow the goal to be specified, and allow helpful feedback to be provided which guides the student twoard the goal.
-
-**TLDR** This API assists in creating code exercises
+Furthermore, the 'goal' cannot be hard-coded; it will be different for each exercise. So this system should also allow the goal to be specified, and allow helpful feedback to be provided which guides the student toward the goal.
 
 Version 1.0 is targeted at HTML and CSS. It is written in JavaScript.
+
+**TLDR** This API assists in creating code exercises
 
 ## The CES API
 
@@ -28,8 +28,9 @@ The API provides many ways to test the code and create feedback
 ## Table of Contents
 
 1. Rules
-2. The `env`
+2. The `env` variable
 3. Assert
+4. Feedback
 
 ## Rules
 
@@ -156,6 +157,10 @@ An important aspect of the library is that it can check that names make sense. F
 
 This aspect will be a huge help when developing exercises, because it's a big step toward preventing an exercise from failing due to a mistake in the assertion code.
 
+## The `env` variable
+
 ## Assert
 
 The `assert` function
+
+## Feedback
