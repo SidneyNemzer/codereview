@@ -97,9 +97,7 @@ ces.newRule({
 
 #### Using templated feedback
 
-All feedback may contain special templates, which are dynamically filled in before being presented to the user.
-
-Some use cases of tempated feedback:
+All feedback may contain special templates, which are dynamically filled in before being presented to the user
 
 ```javascript
 ces.newRule({
@@ -129,7 +127,7 @@ ces.newRule({
 })
 ```
 
-See the "Feedback" section for exact usage of template feedback
+See the "Feedback" section for the exact usage of template feedback
 
 ### `ces.aliasRule( Object: aliasDefinition )`
 
