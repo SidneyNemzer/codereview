@@ -23,7 +23,7 @@ Version 1.0 is targeted at HTML and CSS. It is written in JavaScript.
 
 The designer creates 'rules', which preform checks on submitted code, then return a pass or fail result.
 
-The API provides many ways to test the code and create feedback
+The `ces` Object provides access to this API
 
 ## Table of Contents
 
