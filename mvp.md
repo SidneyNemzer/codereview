@@ -226,7 +226,7 @@ ces.feedbacker('There {{ is_are }} {{ spell_number }} {{ word }}',
 In this case, `word` is pluralized based on the number of items in `list`
 
 ```javascript
-ces.feedbacker('You're missing the {{ list }} {{ word }}',
+ces.feedbacker("You're missing the {{ list }} {{ word }}",
   {
     word: 'element',
     list: [
@@ -238,7 +238,7 @@ ces.feedbacker('You're missing the {{ list }} {{ word }}',
 ```
 
 ```javascript
-ces.feedbacker('You're missing the {{ list }} {{ word }}',
+ces.feedbacker("You're missing the {{ list }} {{ word }}",
   {
     word: 'element',
     list: [
