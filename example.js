@@ -1,14 +1,14 @@
 /* Ouside the exercise */
 
 // Define a new assertion rule
-rule.new({
+codeReview.newRule({
     name: 'valid-doctype',
     feedback: "You're missing a `doctype` tag! You should always include a doctype declaration",
     check: env =>
         env.doctype == 'HTML5'
 })
 
-rule.new({
+codeReview.newRule({
     name: 'basic-structure',
     feedback: "You're missing {{ an_some }} important {{ word }}: {{ list }}",
     options: {
@@ -27,14 +27,15 @@ rule.new({
         }
     }
 })
-rule.alias('has-body-tag', 'basic-structure', {checkFor: ['body']})
+codeReview.aliasRule('has-body-tag', 'basic-structure', {checkFor: ['body']})
 
 
 
 /* In an exercise's assertion code */
 
 // Check a few pre-defined rules
-assert('valid-doctype')
+codeReview
+    .assert('valid-doctype')
     .and('basic-structure', {checkFor: ['body']}) // .and runs the check, even if the preceeding rule fails
     // Instead of 'basic-structure', the alias 'has-body-tag' could have been used instead
     
