@@ -5,32 +5,32 @@
 
 ## Introduction
 
-The most effective learning makes use of instruction *and* evaluation. Instruction is fairly straight-forward. And in many cases, so is evaluation. But when teaching how to program, evaluation becomes difficult; multiple choice questions can enhance learning, but the best evaluation for programing is *code exercises*, where the student writes their own code to complete a goal.
+The most effective learning makes use of instruction *and* evaluation. Instruction is fairly straight-forward. And in many cases, so is evaluation. Multiple choice questions can enhance learning, but the best evaluation for programing is *code exercises*, where the student writes their own code to complete a goal.
 
-Most programing languages are designed to be written correctly. That is, most compilers or interpreters don't handle mistakes well. Forget a single character, or missplace a token, and the errors returned can be unintelligible to the beginner. Beginners benefit from careful guidence, but at the same time, compilers/interpreters shouldn't have to concern themselves with the mistakes that a beginner could make.
+Ideally, these *code exercises* can be graded automatically. Maybe a human is needed to setup the grading, bycreating rules for what the code should look like. However, there are a few issues with automatically grading code.
 
-An instructor or teacher could provide such guidance, but reading lines upon lines of microscopic mistakes can quickly wear on a person. The next best option is to make a computer read the code, and provide guidence.
+Most programing languages are designed to be written correctly. That is, most compilers or interpreters don't handle certian mistakes well. Forget a single character, or missplace a token, and the resulting errors can be unintelligible to a beginner. Beginners benefit from careful guidence, but at the same time, compilers/interpreters shouldn't have to concern themselves with the mistakes that a beginner could make.
 
-The concept is simple, but the implementation may not be; we must create code that: reads code, points out common mistakes, and can verify that the goal was acheived.
+An instructor or teacher could provide such guidance, but reading lines upon lines of microscopic mistakes is exhausting. The next best option is to make a computer read the code, and provide guidence.
+
+The concept is simple, but the implementation may not be; we must create code that reads code, points out common mistakes, and verifies that the goal was acheived.
 
 Furthermore, the 'goal' cannot be hard-coded; it will be different for each exercise. So this system should also allow the goal to be specified, and allow helpful feedback to be provided which guides the student toward the goal.
 
-Version 1.0 is targeted at HTML and CSS. It is written in JavaScript.
+Version 1.0 is targeted at HTML and CSS. Exercise 'rules' are written in JavaScript.
 
-**TLDR** This API assists in creating code exercises
+**TLDR** This API assists in auto-grading code exercises
 
-## The CES API
+## The Code Review API
 
-The designer creates 'rules', which preform checks on submitted code, then return a pass or fail result.
-
-The `ces` Object provides access to this API
+The designer creates 'rules', which preform checks on submitted code, then return a pass or fail result. The `codeReview` Object provides access to this API.
 
 ## Table of Contents
 
 1. Rules
-2. The `env` variable
-3. Assert
-4. Feedback
+  1. The `env` variable
+1. Assert
+1. Feedback
 
 ## Rules
 
