@@ -2,12 +2,12 @@
 
 The 'feedbacker' function provides a simple way to create flexible feedback
 
-## `ces.feedbacker( string: template, Object: options )`
+## `codeReview.feedbacker( string: template, Object: options )`
 
 ### Pluralize a noun based on a number
 
 ```javascript
-ces.feedbacker('There {{ is_are }} {{ number }} {{ word }}',
+codeReview.feedbacker('There {{ is_are }} {{ number }} {{ word }}',
   {
     word: 'error',
     number: 10
@@ -18,7 +18,7 @@ ces.feedbacker('There {{ is_are }} {{ number }} {{ word }}',
 `word` is pluralized with an 's' automatically. If the word pluralizes in a special way:
 
 ```javascript
-ces.feedbacker('There {{ is_are }} {{ number }} {{ word }}',
+codeReview.feedbacker('There {{ is_are }} {{ number }} {{ word }}',
   {
     word: {
       singular: 'city',
@@ -32,7 +32,7 @@ ces.feedbacker('There {{ is_are }} {{ number }} {{ word }}',
 To have the number spelled out:
 
 ```javascript
-ces.feedbacker('There {{ is_are }} {{ spell_number }} {{ word }}',
+codeReview.feedbacker('There {{ is_are }} {{ spell_number }} {{ word }}',
   {
     word: 'error',
     number: 10
@@ -45,7 +45,7 @@ ces.feedbacker('There {{ is_are }} {{ spell_number }} {{ word }}',
 In this case, `word` is pluralized based on the number of items in `list`
 
 ```javascript
-ces.feedbacker("You're missing the {{ list }} {{ word }}",
+codeReview.feedbacker("You're missing the {{ list }} {{ word }}",
   {
     word: 'element',
     list: [
@@ -57,7 +57,7 @@ ces.feedbacker("You're missing the {{ list }} {{ word }}",
 ```
 
 ```javascript
-ces.feedbacker("You're missing the {{ list }} {{ word }}",
+codeReview.feedbacker("You're missing the {{ list }} {{ word }}",
   {
     word: 'element',
     list: [
@@ -74,7 +74,7 @@ Rules can return dynamic feedback by setting their `feedback` key to the templat
 `number` uses the lenght of the `list`, if a `list` is provided
 
 ```javascript
-ces.newRule({
+codeReview.newRule({
     name: 'basic-structure',
     feedback: "You're missing {{ number }} important {{ word }}: {{ list }}",
     options: {

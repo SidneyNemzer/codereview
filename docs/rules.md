@@ -2,12 +2,12 @@
 
 A 'rule' is a function that takes an `env` Object (and possibly some options), preforms a check on the submitted code, then returns a pass or fail result. (Read more about the `env` in the next section).
 
-## `ces.newRule( Object: ruleDefinition )`
+## `codeReview.newRule( Object: ruleDefinition )`
 
 ### Simple rule definition
 
 ```javascript
-ces.newRule({
+codeReview.newRule({
   name: 'example-name',
   // string, must be unique
 
@@ -23,7 +23,7 @@ ces.newRule({
 ### Rule that accepts arguments
 
 ```javascript
-ces.newRule({
+codeReview.newRule({
   name: 'example-name',
   feedback: "You're missing a `doctype` tag! You should always include a doctype declaration",  
 
@@ -44,7 +44,7 @@ ces.newRule({
 ### Rule that returns dynamic feedback
 
 ```javascript
-ces.newRule({
+codeReview.newRule({
   name: 'example-name',
 
   // No 'feedback' key is needed in this case
@@ -66,7 +66,7 @@ ces.newRule({
 All feedback may contain special templates, which are dynamically filled in before being presented to the user
 
 ```javascript
-ces.newRule({
+codeReview.newRule({
     name: 'basic-structure',
     feedback: "You're missing {{ an_some }} important {{ word }}: {{ list }}",
     // In this example, the number of items in the 'list' is used
@@ -95,13 +95,13 @@ ces.newRule({
 
 See the "Feedback" section for the exact usage of template feedback
 
-## `ces.aliasRule( Object: aliasDefinition )`
+## `codeReview.aliasRule( Object: aliasDefinition )`
 
 Rules may be *aliased* to create a new rule, which uses an existing rule and a new default options
 
 ```javascript
 // Assumes we have the 'basic-structure' rule from the last example
-ces.aliasRule({
+codeReview.aliasRule({
   name: 'basic-structure', // The existing rule
   alias: 'has-body-tag', // The alias to create
   options: {
