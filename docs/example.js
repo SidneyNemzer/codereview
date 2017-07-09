@@ -1,14 +1,14 @@
 /* Ouside the exercise */
 
 // Define a new assertion rule
-codeReview.newRule({
+rule.new({
     name: 'valid-doctype',
     feedback: "You're missing a `doctype` tag! You should always include a doctype declaration",
     check: env =>
         env.doctype == 'HTML5'
 })
 
-codeReview.newRule({
+rule.new({
     name: 'basic-structure',
     feedback: "You're missing {{ an_some }} important {{ word }}: {{ list }}",
     options: {
@@ -27,7 +27,7 @@ codeReview.newRule({
         }
     }
 })
-codeReview.aliasRule('has-body-tag', 'basic-structure', {checkFor: ['body']})
+rule.alias('has-body-tag', 'basic-structure', {checkFor: ['body']})
 
 
 
@@ -47,8 +47,11 @@ codeReview
         return result // Returning 'true' means "This passed", a string means "this failed" and the string is used as feedback
     })
     .then(env => {
-        env.element('div').style('background-image') // cascaded background style
-            .raw()
+        env.element('div').style('background-image') // cascaded background style (but not computed)
+        
+        env.getStylesheets() // -> [stylesheet1, stylesheet2]
+        env.getStylesheets('internal') // or 'external'
+            .rules() // -> {div: {background-image: URL}}
             
         env.element('div').styles('background-image')
         // -> ['blue', CSSStyleValue]
@@ -58,9 +61,6 @@ codeReview
         env.styles()
         // -> 
     })
-    
-    
-
     
     
 /*  env.feedbacker(template, number, )
