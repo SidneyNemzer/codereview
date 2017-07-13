@@ -56,13 +56,29 @@ assert.file('index.html')
   ])
 ```
 
-Check an anchor element's host (`anchorElement.host`)
+Check an anchor element's host ("host" is a property on anchor elements, eg `anchorElement.host`)
 
 ```
 assert.file('index.html')
   .element('a')
-  .custom() // TODO
+  .custom(
+    anchor =>
+      anchor.host === "www.ucode.com"
+  )
 ```
+
+### `.custom(checker, feedback)`
+
+#### Arguments
+
+* `checker` : Function
+
+  The callback function which preforms the check. It should accept one argument: the result of the previous function. For example, in the last example, the callback function would receive an anchor element, because the `element()` function was used to locate an anchor element. The callback should return `true` or `false`, based on the result of the check.
+  
+* `feedback` : String
+
+  The feedback that will be used when the `checker` indicates that the assertion failed. The `checker` can also return a String, which will be used as feedback. This allows for dynamic feedback.
+
 
 ## `assert.all`
 
