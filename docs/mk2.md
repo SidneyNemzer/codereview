@@ -86,8 +86,8 @@ assert.file('index.html')
 Allows multiple assertions to be run
 
 ```javascript
-assert.all(
+assert.all([
   assert.file('index.html'),
   assert.file('style.css')
-)
+])
 ```
