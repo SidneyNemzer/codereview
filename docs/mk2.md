@@ -63,7 +63,8 @@ assert.file('index.html')
   .element('a')
   .custom(
     anchor =>
-      anchor.host === "www.ucode.com"
+      anchor.host === "www.ucode.com",
+    "This is feedback"
   )
 ```
 
